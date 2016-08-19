@@ -1,0 +1,28 @@
+{
+  "extends": "airbnb/legacy",
+  "rules": {
+    "vars-on-top": 0,
+    "func-names": 0,
+    "no-new": 0,
+    "space-before-function-paren": [2, "never"],
+    "no-param-reassign": 0
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "phantomjs": true,
+    "jquery": true
+  },
+  "globals": {
+    "$": true,
+    "Cookies": true,
+    "createjs": true,
+    "$": true,
+    "BaseModule": true,
+    "iNoBounce": true,
+    "Rollbar": true,
+    "Stickyfill": true,
+    "clearAnimationFrameInterval": true,
+    "setAnimationFrameInterval": true
+  }
+}
