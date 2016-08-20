@@ -1,7 +1,5 @@
-'use strict';
+const del = require('del');
 
-var del = require('del');
-
-module.exports = function() {
-  return del(['build', '.tmp']);
-};
+module.exports = () => {
+  return del(['.build', '.tmp', '.cache']);
+}

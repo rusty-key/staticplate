@@ -1,37 +1,20 @@
-'use strict';
+const gulp = require('gulp');
+const bsync = require('browser-sync');
+const $ = require('gulp-load-plugins')();
 
-var gulp = require('gulp');
-var bsync = require('browser-sync');
-var $ = require('gulp-load-plugins')();
-var gs = require('gulp-sync')(gulp);
-
-module.exports = function () {
+module.exports = () => {
   bsync({
     notify: false,
-    port: 9000,
+    port: 9010,
     open: false,
     ghostMode: false,
-    server: {
-      baseDir: ['build']
-    }
+    proxy: 'localhost:3000',
+    files: '.build/**',
+    middleware: require('serve-static')('.build')
   });
 
-  // watch for changes
-  gulp.task('partials:watch', gs.sync(['layout']), bsync.reload);
-  gulp.watch(['app/partials/**/*.jade'], ['partials:watch']);
+  gulp.watch(['app/assets/styles/**/*.pcss', 'app/assets/styles/**/*.css'], ['styles']);
+  gulp.watch(['app/**/*.pug'], ['layout']);;
 
-  gulp.task('layout:watch', gs.sync(['layout']), bsync.reload);
-  gulp.watch(['app/*.jade', 'app/layouts/**/*.jade'], ['layout:watch']);
-
-  gulp.task('scripts:watch', gs.sync(['scripts']), bsync.reload);
-  gulp.watch(['app/assets/scripts/**/*.js'], ['scripts:watch']);
-
-  gulp.task('libs:watch', gs.sync(['libs']), bsync.reload);
-  gulp.watch(['app/assets/scripts/libs/*.js'], ['libs:watch']);
-
-  gulp.task('styles:watch', gs.sync(['styles']));
-  gulp.watch(['app/assets/styles/**/*.css'], ['styles:watch']);
-
-  gulp.task('images:watch', gs.sync(['images']), bsync.reload);
-  gulp.watch(['app/assets/images/**'], ['images:watch']);
-};
+  gulp.watch(['build/index.html'], bsync.reload);;
+}

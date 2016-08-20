@@ -1,14 +1,11 @@
-'use strict';
-
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var errorHandler = require('../helpers/errorHandler');
-var isDevMode = require('../helpers/envHelpers').isDevMode;
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
+const errorHandler = require('../helpers/errorHandler');
+const isDevMode = require('../helpers/envHelpers').isDevMode;
 
 module.exports = function() {
-  return gulp.src('app/*.jade')
-    .pipe($.insert.prepend('include /.tmp/partials.jade\n'))
-    .pipe($.jade({
+  return gulp.src('app/*.pug')
+    .pipe($.pug({
       basedir: '.',
       pretty: isDevMode()
     }))
