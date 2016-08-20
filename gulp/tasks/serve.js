@@ -8,13 +8,13 @@ module.exports = () => {
     port: 9010,
     open: false,
     ghostMode: false,
-    proxy: 'localhost:3000',
-    files: '.build/**',
-    middleware: require('serve-static')('.build')
+    server: {
+      baseDir: ['build']
+    }
   });
 
   gulp.watch(['app/assets/styles/**/*.pcss', 'app/assets/styles/**/*.css'], ['styles']);
   gulp.watch(['app/**/*.pug'], ['layout']);;
 
-  gulp.watch(['build/index.html'], bsync.reload);;
+  gulp.watch(['build/*.html'], bsync.reload);;
 }

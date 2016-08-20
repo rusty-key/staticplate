@@ -1,13 +1,13 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const bsync = require('browser-sync');
-const isDevMode = require('../helpers/envHelpers').isDevMode;
+const isProduction = require('../helpers/envHelpers').isProduction;
 const errorHandler = require('../helpers/errorHandler');
 
 module.exports = function() {
   return gulp.src('app/assets/styles/app.css')
     .pipe($.cssGlobbing())
-    .pipe($.if(isDevMode, $.sourcemaps.init()))
+    .pipe($.if(!isProduction, $.sourcemaps.init()))
     .pipe($.postcss([
       require('postcss-import')(),
       require('postcss-mixins'),
@@ -18,7 +18,7 @@ module.exports = function() {
       require('autoprefixer')({ browsers: ['last 2 version'] }),
     ]))
     .on('error', errorHandler)
-    .pipe($.if(isDevMode, $.sourcemaps.write()))
+    .pipe($.if(!isProduction, $.sourcemaps.write()))
     .pipe(gulp.dest('build/assets/styles'))
     .pipe(bsync.reload({ stream: true }));
 };

@@ -1,23 +1,18 @@
-'use strict';
-
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var gs = require('gulp-sync')(gulp);
+const gulp = require('gulp');
+const gs = require('gulp-sync')(gulp)
+const $ = require('gulp-load-plugins')();
+const envHelpers = require('./gulp/helpers/envHelpers');
 
 gulp.task('clean', require('./gulp/tasks/clean'));
-gulp.task('styles', require('./gulp/tasks/styles'));
-gulp.task('libs', require('./gulp/tasks/libs'));
 gulp.task('scripts', require('./gulp/tasks/scripts'));
+gulp.task('styles', require('./gulp/tasks/styles'));
 gulp.task('layout', require('./gulp/tasks/layout'));
-gulp.task('images', require('./gulp/tasks/images'));
 
-gulp.task('devmode', require('./gulp/helpers/envHelpers').enableDevMode);
+gulp.task('enableBuildMode', envHelpers.enableBuildMode);
 
-var defaultBuildSequence = [
-  'clean',
-  ['styles', 'images', 'libs', 'scripts', 'layout']
-];
+const defaultBuildSequence = ['clean', ['layout', 'scripts', 'styles']];
 
-gulp.task('build', gs.sync(defaultBuildSequence));
-gulp.task('serve', gs.sync(['devmode'].concat(defaultBuildSequence)), require('./gulp/tasks/serve'));
+gulp.task('build', gs.sync(['enableBuildMode'].concat(defaultBuildSequence)));
+gulp.task('serve', gs.sync(defaultBuildSequence), require('./gulp/tasks/serve'));
+
 gulp.task('default', ['serve']);

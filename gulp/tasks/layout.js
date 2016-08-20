@@ -1,13 +1,13 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const errorHandler = require('../helpers/errorHandler');
-const isDevMode = require('../helpers/envHelpers').isDevMode;
+const isProduction = require('../helpers/envHelpers').isProduction;
 
 module.exports = function() {
   return gulp.src('app/*.pug')
     .pipe($.pug({
       basedir: '.',
-      pretty: isDevMode()
+      pretty: !isProduction()
     }))
     .on('error', errorHandler)
     .pipe(gulp.dest('build'));
