@@ -1,5 +1,3 @@
-@import "normalize-css/normalize.css";
-
-@import "tech/vars";
-
-@import "partials/common";
+@import "vendors/*";
+@import "tech/*";
+@import "partials/*";

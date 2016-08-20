@@ -1,21 +1,9 @@
 @define-mixin respond-to $media {
   @if $media == mob {
     @media only screen and (max-width: 720px) { @mixin-content; }
-  }
-  @if $media == tab {
+  } @else if $media == tab {
     @media only screen and (max-width: 992px) { @mixin-content; }
-  }
-  @if $media == desk {
+  } @else if $media == desk {
     @media only screen and (max-width: 1200px) { @mixin-content; }
   }
-}
-
-@define-mixin flat-box {
-  display: flex;
-  justify-content: space-between;
-}
-
-@define-mixin icon $name {
-  background-image: url(../images/icons/$name.svg);
-  background-repeat: no-repeat;
 }

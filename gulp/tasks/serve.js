@@ -5,7 +5,7 @@ const $ = require('gulp-load-plugins')();
 module.exports = () => {
   bsync({
     notify: false,
-    port: 9010,
+    port: 9000,
     open: false,
     ghostMode: false,
     server: {

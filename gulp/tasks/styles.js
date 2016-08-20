@@ -6,7 +6,9 @@ const errorHandler = require('../helpers/errorHandler');
 
 module.exports = function() {
   return gulp.src('app/assets/styles/app.css')
-    .pipe($.cssGlobbing())
+    .pipe($.cssGlobbing({
+      extensions: ['.css', '.pcss'],
+    }))
     .pipe($.if(!isProduction, $.sourcemaps.init()))
     .pipe($.postcss([
       require('postcss-import')(),
